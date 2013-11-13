@@ -23,12 +23,12 @@ from xml.sax.saxutils import escape
 from xml.sax.saxutils import unescape
 import re
 
-from odf.opendocument import OpenDocumentSpreadsheet
-from odf.opendocument import load
-from odf.table import Table, TableColumn, TableRow, TableCell
-from odf.style import Style, TableProperties, TextProperties, TableCellProperties, TableColumnProperties, Map
-from odf.number import NumberStyle, DateStyle, CurrencyStyle, TextStyle, Number, Text, Day, Month, Year, Era
-from odf.text import P, Date
+from lib.odfpy.odf.opendocument import OpenDocumentSpreadsheet
+from lib.odfpy.odf.opendocument import load
+from lib.odfpy.odf.table import Table, TableColumn, TableRow, TableCell
+from lib.odfpy.odf.style import Style, TableProperties, TextProperties, TableCellProperties, TableColumnProperties, Map
+from lib.odfpy.odf.number import NumberStyle, DateStyle, CurrencyStyle, TextStyle, Number, Text, Day, Month, Year, Era
+from lib.odfpy.odf.text import P, Date
 
 from sodscell import SodsCell
 
@@ -121,7 +121,7 @@ class SodsOds():
 		
 		return width
 
-	def cleanFormual(self, string):
+	def cleanFormula(self, string):
 		''' clean odf formula '''
 		
 		if not string: return None
@@ -193,7 +193,7 @@ class SodsOds():
 				
 				c.formula = cell.getAttribute('formula')
 				if c.formula:
-					c.formula = self.cleanFormual(c.formula[3:])
+					c.formula = self.cleanFormula(c.formula[3:])
 				c.date_value = cell.getAttribute('datevalue')
 				c.value = cell.getAttribute('value')
 				
@@ -249,7 +249,7 @@ class SodsOds():
 					for p in style.getElementsByType(Map):
 						c.condition = p.getAttribute('condition')
 						if c.condition:
-							c.condition = self.cleanFormual(c.condition)
+							c.condition = self.cleanFormula(c.condition)
 						
 						applystylename = p.getAttribute('applystylename')
 						applystyle = doc.getStyleByName(applystylename)
