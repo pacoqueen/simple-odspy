@@ -21,7 +21,7 @@
 import re
 from datetime import datetime
 
-from xlwt import *
+from lib.xlwt.xlwt import *
 
 class SodsXls():
 	def __init__(self, table, i_max = 30, j_max = 30):
